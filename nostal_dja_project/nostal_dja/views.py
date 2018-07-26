@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Decade, Fad
 from .forms import DecadeForm, FadForm
+from django.contrib.auth.decorators import login_required
 
 #################### DECADES #################
 
@@ -15,6 +16,7 @@ def decade_detail(request, pk):
     return render(request, 'nostal_dja/decade_detail.html', { 'decade': decade })
 
 # create - decade
+@login_required
 def decade_create(request):
     if request.method == 'POST':
         form = DecadeForm(request.POST)
@@ -38,6 +40,7 @@ def decade_update(request, pk):
     return render(request, 'nostal_dja/decade_form.html', { 'form': form })
 
 # delete - decade
+@login_required
 def decade_delete(request, pk):
     Decade.objects.get(id=pk).delete()
     return redirect('decade_list')
