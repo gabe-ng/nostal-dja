@@ -1,16 +1,16 @@
-{% extends 'tunr/base.html' %} {% block content %}
+{% extends 'nostal_dja/base.html' %} {% block content %}
 
 <h2>{{ decade.start_year }}
-    <a href="">(edit)</a>
+    <a href="{% url 'decade_update' pk=decade.pk %}">(edit)</a>
 </h2>
 
 <h3>Fads
-    <a href="">(+)</a>
+    <a href="{% url 'fads_create' %}">(+)</a>
 </h3>
 <ul>
     {% for fad in decade.fads.all %}
     <li>
-        <a href="">{{ fad.name }}-{{ fa.description }}</a>
+        <a href="{% url 'fads_detail' id=fad.id %}">{{ fad.name }}-{{ fa.description }}</a>
     </li>
     {% endfor %}
 </ul>

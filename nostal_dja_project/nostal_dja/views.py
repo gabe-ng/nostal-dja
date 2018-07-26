@@ -7,7 +7,7 @@ from .forms import DecadeForm, FadForm
 # index - decades
 def decade_list(request):
     decades = Decade.objects.all()
-    return render(requst, 'nostal_dja/decade_list.html', { 'decades': decades })
+    return render(request, 'nostal_dja/decade_list.html', { 'decades': decades })
 
 # show - decade
 def decade_detail(request, pk):
@@ -28,9 +28,19 @@ def decade_create(request):
 # update - decade
 def decade_update(request, pk):
     decade = Decade.objects.get(id=pk)
-    
+    if request.method == 'POST':
+        form = DecadeForm(request.POST, instance=artist)
+        if form.is_valid():
+            decade = form.save()
+            return redirect('decade_detail', pk=artist.pk)
+    else:
+        form = DecadeForm(instance=artist)
+    return render(request, 'nostal_dja/decade_form.html', { 'form': form })
 
 # delete - decade
+def decade_delete(request, pk):
+    Decade.objects.get(id=pk).delete()
+    return redirect('decade_list')
 
 ################### FADS #####################
 
@@ -42,15 +52,30 @@ def fads_list(request):
 # show - fads
 def fads_detail(request, id):
     fad = Fad.objects.get(id=id)
-    return render(request, 'nostal_dja/fads_detail.html', { 'fad': fad })
+    return render(request, 'nostal_dja/fad_detail.html', { 'fad': fad })
 
 # create - fads
-def fad_create(request):
+def fads_create(request):
     if request.method == 'POST':
         form = FadForm(request.POST)
         if form.is_valid():
             fad = form.save()
-            return redirect('fad_detail', id=fad.id)
+            return redirect('fads_detail', id=fad.id)
     else:
         form = FadForm()
     return render(request, 'nostal_dja/decade_form.html', { 'form': form })
+
+def fads_update(request, id):
+    fad = Fad.object.get(id=id)
+    if request.method == 'POST':
+        form = FadForm(request.POST, instance=fad)
+        if form.is_valid():
+            song = form.save()
+            return redirect('fad_detail', id=fad.id)
+    else:
+        form = FadForm(instance=fad)
+    return render(request, 'nostal_dja/fad_form.html', { 'form': form })
+
+def fads_delete(request, id):
+    Fad.objects.get(id=id).delete()
+    return redirect('fads_list')

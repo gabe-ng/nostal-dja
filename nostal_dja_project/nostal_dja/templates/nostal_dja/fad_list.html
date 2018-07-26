@@ -1,13 +1,13 @@
 {% extends 'nostal_dja/base.html' %} {% block content %}
 
 <h2>Fads
-    <a href="">(+)</a>
+    <a href="{% url 'fads_create' %}">(+)</a>
 </h2>
 <ul>
     {% for fad in fads %}
     <li>
-        <a href="{% url 'fad_detail' id=fad.id %}">{{ fad.name}}</a>
-        <a href="" class="delete">X</a>
+        <a href="{% url 'fads_detail' id=fad.id %}">{{ fad.name}}</a>
+        <a href="{% url 'fads_delete' id=fad.id %}" class="delete">X</a>
     </li>
     {% endfor %}
 </ul>
