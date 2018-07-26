@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'nostal_dja_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nostal_dja,
+        'NAME': 'nostal_dja',
     }
 }
 
