@@ -6,5 +6,5 @@
 
 ### Features
 
-> Simple UI allowing user to utilize CRUD functionality and routes
-> User authentication via Django
+* Simple UI allowing user to utilize CRUD functionality and routes
+* User authentication via Django
